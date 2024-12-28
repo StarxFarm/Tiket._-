@@ -65,7 +65,7 @@ public class SistemPemesananBookingKonser {
         }
     }
 
-    // Inisialisasi daftar konser menggunakan ArrayList
+    // Inisialisasi daftar konser menggunakan Array
     private static void initializeConcerts() {
         concertNames.add("Konser Panggung A");
         concertNames.add("Konser Panggung B");
@@ -98,6 +98,11 @@ public class SistemPemesananBookingKonser {
         System.out.println("\n============");
         System.out.println("Daftar Konser:");
         System.out.println("==============");
+
+        String[] concertNamesArray = {"Konser Panggung A", "Konser Panggung B", "Konser Panggung C"};
+        int[] availableTicketsArray = {50, 75, 100};
+        int[] ticketPricesArray = {500000, 750000, 1000000};
+    
         for (int i = 0; i < concertNames.size(); i++) {
             System.out.println((i + 1) + ". " + concertNames.get(i)
                     + " (Tiket tersedia: " + availableTickets.get(i)
@@ -123,24 +128,22 @@ public class SistemPemesananBookingKonser {
             System.out.println("\nPilih konser dengan memasukkan nomor (atau 0 untuk keluar): ");
             int choice = tryCatchInput(scanner);
 
-            //RELASIONAL
             if (choice == 0) {
                 System.out.println("Pemesanan dibatalkan. Kembali ke menu utama.");
                 return; // Kembali ke menu utama
             }
-            //LOGIKA
             if (choice < 1 || choice > concertNames.size()) {
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
                 continue;
             } else {
                 System.out.println("Pilihan valid. Memproses pemesanan...");
             }
+
             int concertIndex = choice - 1;
             System.out.println("Anda memilih: " + concertNames.get(concertIndex));
             System.out.println("Berapa tiket yang ingin Anda pesan?");
             int ticketCount = tryCatchInput(scanner);
 
-            //RELASIONAL
             if (ticketCount <= 0) {
                 System.out.println("Jumlah tiket harus lebih dari 0. Silakan coba lagi.");
                 continue;
