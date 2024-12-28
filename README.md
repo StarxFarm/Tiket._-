@@ -98,7 +98,6 @@ public class SistemPemesananBookingKonser {
         System.out.println("\n============");
         System.out.println("Daftar Konser:");
         System.out.println("==============");
-        //ARITMATIKA,REASIONAL
         for (int i = 0; i < concertNames.size(); i++) {
             System.out.println((i + 1) + ". " + concertNames.get(i)
                     + " (Tiket tersedia: " + availableTickets.get(i)
@@ -109,10 +108,12 @@ public class SistemPemesananBookingKonser {
     // Memesan tiket
     private static void bookTickets(Scanner scanner) {
         while (true) {
+
             displayConcerts(); // Menampilkan daftar konser
             System.out.println("\nMasukkan nama Anda (atau ketik 'keluar' untuk kembali ke menu utama): ");
             scanner.nextLine(); // Menghapus newline dari input sebelumnya
-            // RELASIONAL
+            
+
             String customerName = scanner.nextLine();
             if (customerName.equalsIgnoreCase("keluar")) {
                 System.out.println("Pemesanan dibatalkan. Kembali ke menu utama.");
@@ -134,7 +135,6 @@ public class SistemPemesananBookingKonser {
             } else {
                 System.out.println("Pilihan valid. Memproses pemesanan...");
             }
-            //ARITMETIKA ,METHOD CALL OPERTOR,PENUGASAN
             int concertIndex = choice - 1;
             System.out.println("Anda memilih: " + concertNames.get(concertIndex));
             System.out.println("Berapa tiket yang ingin Anda pesan?");
@@ -146,12 +146,12 @@ public class SistemPemesananBookingKonser {
                 continue;
             }
 
-            //RELASIONAL
             if (ticketCount > availableTickets.get(concertIndex)) {
                 System.out.println("Maaf, tiket yang tersedia tidak mencukupi. Coba jumlah lebih kecil.");
                 continue;
             }
-            // MEMPROSE PEMESANAN
+
+
             // OPERTOR ARITMETIKA
             int totalPrice = ticketCount * ticketPrices.get(concertIndex);
             availableTickets.set(concertIndex, availableTickets.get(concertIndex) - ticketCount);
@@ -162,6 +162,7 @@ public class SistemPemesananBookingKonser {
             bookedConcerts.add(concertNames.get(concertIndex));
             bookedTickets.add(ticketCount);
             totalPrices.add(totalPrice);
+
             // OPERATOR PENUGASAN
             System.out.println("=================================================================================");
             System.out.println("Pemesanan berhasil! Anda memesan "
@@ -183,7 +184,6 @@ public class SistemPemesananBookingKonser {
         System.out.println("\n===========================");
         System.out.println("Tiket yang Telah Dipesan:");
         System.out.println("===========================");
-        // OPERATOR ARITMETIKA,RELASIONAL
         for (int i = 0; i < bookedConcerts.size(); i++) {
             System.out.println((i + 1) + ". Konser: " + bookedConcerts.get(i)
                     + " | Jumlah Tiket: " + bookedTickets.get(i)
@@ -208,7 +208,7 @@ public class SistemPemesananBookingKonser {
     private static void adminMenu(Scanner scanner) {
         System.out.println("\nMasukkan PIN untuk akses menu Admin: ");
         scanner.nextLine(); // Membersihkan input newline
-        String enteredPin = scanner.nextLine(); // Membaca input PIN dari user
+        String enteredPin = scanner.nextLine(); // Membaca input PIN dari use
 
         if (enteredPin.equals(ADMIN_PIN)) {
             System.out.println("\n===========================");
@@ -231,29 +231,26 @@ public class SistemPemesananBookingKonser {
 
     // Metode rekursif dengan validasi input dan pointer
     private static int tryCatchInput(Scanner scanner) {
+
         int[] attemptPointer = new int[1]; // Pointer untuk mencatat jumlah percobaan
+        
         return tryCatchInput(scanner, attemptPointer);
     }
 
-// Metode rekursif yang juga melibatkan pointer untuk validasi
+//  pointer untuk validasi
     private static int tryCatchInput(Scanner scanner, int[] pointer) {
-        pointer[0]++;  // Increment attempt
-        System.out.printf("Percobaan ke-%d: Masukkan angka: ", pointer[0]);
+        pointer[0]++;  
+        System.out.printf(" Masukkan angka: ", pointer[0]);
 
         // Memeriksa apakah input valid atau tidak
         if (scanner.hasNextInt()) {
             int input = scanner.nextInt();
-            if (input >= 0) {
-                System.out.println("Input valid.");
-                return input;
-            } else {
-                System.out.println("Input tidak bisa negatif. Silakan coba lagi.");
-            }
+            System.out.println(input >= 0 ? "Input valid." : "Input tidak negatif.");
+            return (input >= 0) ? input : -1; 
         } else {
             scanner.next(); // Menghapus input yang salah
             System.out.println("Input tidak valid. Harap masukkan angka.");
-        }
-
+        }        
         return tryCatchInput(scanner, pointer); // Rekursi untuk percobaan lagi jika input salah
     }
 }
